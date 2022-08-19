@@ -1,15 +1,62 @@
+@font-face{
+    font-family:'digital-clock-font';
+    src: url('/media/digital-7.ttf');
+}
+
 *{
     margin: 0;
     padding: 0%;
 }
 
 body{
+    height: 100vh;
+    background-color: rgb(100, 90, 102);
+}
+
+.header{
+    background-color: rgb(20, 20, 20);
+}
+
+.menu{
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu a{
+    color: rgb(238, 238, 238);
+    text-decoration: none;
+    font-size: 3rem;
+}
+
+
+
+.game{
+    display: flex;
+    flex-direction: row;
+}
+
+.timer, .bomb, .other{
+    margin-top: 3rem;
+    width: 33.33%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    justify-content: center;
 }
+
+.timer{
+    margin-left: 1rem;
+    border: 3px solid black;
+    font-size: 5rem;
+    font-family:'digital-clock-font';
+    color: rgb(46, 33, 33);
+    max-height: 10rem;
+}
+
+.bomb{
+    gap: 2.5rem;
+    justify-content: flex-start;
+}
+
 canvas{
-    background-color: black;
+    background-color: rgb(201, 201, 201);
 }
