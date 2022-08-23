@@ -44,6 +44,9 @@ body{
 }
 
 .timer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     margin-left: 1rem;
     border: 3px solid black;
     font-size: 5rem;
@@ -58,5 +61,6 @@ body{
 }
 
 canvas{
-    background-color: rgb(201, 201, 201);
+    background-color: rgb(167, 167, 167);
 }
+
