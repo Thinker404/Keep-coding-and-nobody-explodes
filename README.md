@@ -7,7 +7,7 @@ O jogo é inteiramente feito com JavaScript e conta com uma interface em HTML5 e
 
 
 
-***__O projeto se encontra atualmente em andamento e ao ser finalizado o READ.ME será atualizado__***
+***__O projeto encontra-se atualmente em andamento e ao ser finalizado o READ.ME será atualizado__***
 
 Feito por:
 - Thinker_DBR
