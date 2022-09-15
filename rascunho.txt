@@ -1,0 +1,16 @@
+
+
+    function animate(currentTime){
+
+        // draw a full randomly circle
+        let x=20;
+        let y=20;
+        let radius=20;
+        canvas1.beginPath();
+        canvas1.arc(x,y,radius,0,Math.PI*2);
+        canvas1.fillStyle='#'+Math.floor(Math.random()*16777215).toString(16);
+        canvas1.fill();
+
+        // request another loop of animation
+        requestAnimationFrame(animate);
+    }

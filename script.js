@@ -1,53 +1,54 @@
 
-function padrao(ctx){
-    ctx.beginPath();
-    ctx.fillStyle = 'green';
-    ctx.ellipse(20,20,10,10,0,0,2*Math.PI,false);
-    ctx.lineWidth = "2";
-    ctx.stroke();
-    ctx.fill();
-    ctx.beginPath();
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = "2";
-    ctx.rect(5,5,290,290)
-    ctx.stroke();
-}
+// function padrao(ctx){
+//     ctx.beginPath();
+//     ctx.fillStyle = 'green';
+//     ctx.ellipse(20,20,10,10,0,0,2*Math.PI,false);
+//     ctx.lineWidth = "2";
+//     ctx.stroke();
+//     ctx.fill();
+//     ctx.beginPath();
+//     ctx.strokeStyle = "black";
+//     ctx.lineWidth = "2";
+//     ctx.rect(5,5,290,290)
+//     ctx.stroke();
+// }
 
-function cinza(ctx){
-    ctx.beginPath();
-    ctx.fillStyle = 'gray';
-    ctx.ellipse(20,20,10,10,0,0,2*Math.PI,false);
-    ctx.lineWidth = "2";
-    ctx.stroke();
-    ctx.fill();
-    ctx.beginPath();
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = "2";
-    ctx.rect(5,5,290,290)
-    ctx.stroke();
-}
+// function cinza(ctx){
+//     ctx.beginPath();
+//     ctx.fillStyle = 'gray';
+//     ctx.ellipse(20,20,10,10,0,0,2*Math.PI,false);
+//     ctx.lineWidth = "2";
+//     ctx.stroke();
+//     ctx.fill();
+//     ctx.beginPath();
+//     ctx.strokeStyle = "black";
+//     ctx.lineWidth = "2";
+//     ctx.rect(5,5,290,290)
+//     ctx.stroke();
+// }
 
 
-function animate(tela, t){
+// function animate(tela, t){
     
-    requestAnimationFrame(animate);
+//     requestAnimationFrame(animate);
+//     tela.clearRect(0, 0, 100, 100);
     
     
-    
-    if(t == 0){
-        cinza(tela);
-        t = 1;
-        return;
-    }else{
-        padrao(tela);
-        t = 0;
-        return;
-    }
-}
+//     if(t == 0){
+//         cinza(tela);
+//         t = 1;
+//         return;
+//     }else{
+//         padrao(tela);
+//         t = 0;
+//         return;
+//     }
+// }
 
 //Relógio da bomba
 function relogio() {
 if(condiçãoDeJogo == true){
+
     if(min == 00 && sec == 00){
         alert("You lose!");
         condiçãoDeJogo = false;
@@ -107,18 +108,79 @@ MOD3.height = MOD3.width;
 MOD4.width = 300
 MOD4.height = MOD4.width;
 
-var t
-
-var t1 = 0;
-var t2 = 0;
-var t3 = 0;
-var t4 = 0;
-
 let min = 06;
 let sec = 00;
 
 let condiçãoDeJogo = true;
 
-setInterval(animate(canvas1,t1), 1000)
-setInterval(relogio, 1000);
 
+//ANIMATION:
+
+function pisca_verde_animation(quadro){
+    let x=20;
+    let y=20;
+    let radius=10;
+    quadro.beginPath();
+    quadro.fillStyle='#00FF00';
+    quadro.arc(x,y,radius,0,Math.PI*2);
+    quadro.fill();
+    
+
+}
+function pisca_cinza_animation(quadro){
+    let x=20;
+    let y=20;
+    let radius=10;
+    quadro.beginPath();
+    quadro.fillStyle='#808080';
+    quadro.arc(x,y,radius,0,Math.PI*2);
+    quadro.fill();
+
+}
+
+//CALLING
+
+var fps_pisca = 1;
+var t = 0;
+
+function pisca_call(timestamp){
+    setTimeout(function(){ //requestAnimationFrame to 20fps
+
+        if(t == 0){
+            pisca_verde_animation(canvas1)
+            pisca_verde_animation(canvas2)
+            pisca_verde_animation(canvas3)
+            pisca_verde_animation(canvas4)
+            t = 1;
+        }else{
+            pisca_cinza_animation(canvas1)
+            pisca_cinza_animation(canvas2)
+            pisca_cinza_animation(canvas3)
+            pisca_cinza_animation(canvas4)
+            t = 0;
+        }
+        requestAnimationFrame(pisca_call)
+        
+    }, 1000/fps_pisca)
+}
+requestAnimationFrame(pisca_call);
+
+// ------------ END-ANIMATION --------------
+
+//Modulo dos fios
+function mod2(canvas2){
+    criarLinha(canvas2, 0,50,10,50, 7);
+}
+
+//setInterval(animate(canvas1,t1), 1000)
+setInterval(relogio, 1000);
+mod2(canvas2)
+
+function criarLinha(mod2,x1,y1, x2, y2, gr){
+    mod2.beginPath()
+    mod2.moveTo(x1,y1)
+    mod2.lineTo(x2,y2)
+    mod2.strokeStyle = "red"
+    mod2.lineWidth = gr
+    mod2.stroke()
+}
