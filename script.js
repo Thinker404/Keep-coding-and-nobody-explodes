@@ -30,16 +30,16 @@ function cinza(ctx){
 
 function animate(tela, t){
     
-    requestAnimationFrame(animate)
-    tela.clearRect(0,0,300,300);
+    requestAnimationFrame(animate);
+    
     
     
     if(t == 0){
-        padrao(tela)
+        cinza(tela);
         t = 1;
         return;
     }else{
-        cinza(tela)
+        padrao(tela);
         t = 0;
         return;
     }
@@ -47,19 +47,43 @@ function animate(tela, t){
 
 //Relógio da bomba
 function relogio() {
-    sec = sec - 1;
-
-
-
-    if(min == 0){
-        sec = 59
-        document.getElementById('min').innerHTML = min;
-        document.getElementById('sec').innerText = sec;
-    }
-    
+if(condiçãoDeJogo == true){
     if(min == 00 && sec == 00){
         alert("You lose!");
+        condiçãoDeJogo = false;
+        return;
     }
+
+    if(sec <= 10 && sec>0){
+        sec = sec - 1;
+        document.getElementById('sec').innerText = `0${sec}`;
+        return
+    }
+
+    if(sec >= 11){
+        sec = sec - 1;
+        document.getElementById('sec').innerText = sec;
+        return
+    }
+
+    if(min > 0 && sec == 0){
+        min = min-1
+        document.getElementById('min').innerText = `0${min}`;
+        sec = 59    
+        document.getElementById('sec').innerText = sec;
+        return
+    }
+
+    if(min == 0){
+        sec = sec - 1
+        document.getElementById('min').innerHTML = `0${min}`;
+        document.getElementById('sec').innerText = sec;
+        return
+    }
+}
+
+
+
 }
 
 const MOD1 = document.getElementById('mod_1');
@@ -83,15 +107,18 @@ MOD3.height = MOD3.width;
 MOD4.width = 300
 MOD4.height = MOD4.width;
 
+var t
+
 var t1 = 0;
 var t2 = 0;
 var t3 = 0;
 var t4 = 0;
 
-let min = 5;
+let min = 06;
 let sec = 00;
 
-setInterval(animate(canvas1,t1), 1000)
-setInterval(relogio, 1000)
+let condiçãoDeJogo = true;
 
+setInterval(animate(canvas1,t1), 1000)
+setInterval(relogio, 1000);
 
