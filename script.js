@@ -176,13 +176,13 @@ function mod2(canvas2){
     criarLinha(canvas2, 0, 250, 300, 250, 7, 'grey');
 }
 
-function erased(canvas2){
-    if(){}
-}
 
-//setInterval(animate(canvas1,t1), 1000)
+
+
 setInterval(relogio, 1000);
 mod2(canvas2)
+
+//Modulo 2
 
 function criarLinha(mod2,x1,y1, x2, y2, gr, cor){
     mod2.beginPath()
@@ -192,3 +192,72 @@ function criarLinha(mod2,x1,y1, x2, y2, gr, cor){
     mod2.lineWidth = gr
     mod2.stroke()
 }
+
+function cortar(index_fio){
+    
+    switch (index_fio){
+        case 0:
+            xi = 10;
+            yi = 45;
+            xf = 280;
+            yf = 15;
+            break;
+            
+        case 1:
+            xi = 10;
+            yi = 95;
+            xf = 280;
+            yf = 15;
+            break;
+            
+        case 2:
+            xi = 10;
+            yi = 145;
+            xf = 280;
+            yf = 15;
+            break;
+
+        case 3:
+            xi = 10;
+            yi = 195;
+            xf = 280;
+            yf = 15;
+            break;
+
+        case 4:
+            xi = 10;
+            yi = 245;
+            xf = 280;
+            yf = 15;
+            break;
+    }   
+
+    canvas2.clearRect(xi,yi,xf,yf);
+}
+   
+
+MOD2.addEventListener('click', (event) => {
+
+    //const rect = MOD2.getBoundingClientRect();
+    //console.log(event)
+    //var mouse_x = event.offsetX;
+
+    var mouse_y = event.offsetY;
+    if((mouse_y >= 50-4) && (mouse_y <= 57-4)){
+        cortar(0);
+    }
+    if((mouse_y >= 100-4) && (mouse_y <= 107-4)){
+        cortar(1);
+    }
+    if((mouse_y >= 150-4) && (mouse_y <= 157-4)){
+        cortar(2);
+    }
+    if((mouse_y >= 200-4) && (mouse_y <= 207-4)){
+        cortar(3);
+    }
+    if((mouse_y >= 250-4) && (mouse_y <= 257-4)){
+        cortar(4);
+    }
+
+})
+

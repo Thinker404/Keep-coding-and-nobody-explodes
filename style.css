@@ -62,5 +62,6 @@ body{
 
 canvas{
     background-color: rgb(167, 167, 167);
+    cursor: url('./media/scissors.cur'), auto
 }
 
