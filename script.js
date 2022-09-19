@@ -169,18 +169,26 @@ requestAnimationFrame(pisca_call);
 
 //Modulo dos fios
 function mod2(canvas2){
-    criarLinha(canvas2, 0,50,10,50, 7);
+    criarLinha(canvas2, 0, 50, 300, 50, 7, 'red');
+    criarLinha(canvas2, 0, 100, 300, 100, 7, 'black');
+    criarLinha(canvas2, 0, 150, 300, 150, 7, 'green');
+    criarLinha(canvas2, 0, 200, 300, 200, 7, 'yellow');
+    criarLinha(canvas2, 0, 250, 300, 250, 7, 'grey');
+}
+
+function erased(canvas2){
+    if(){}
 }
 
 //setInterval(animate(canvas1,t1), 1000)
 setInterval(relogio, 1000);
 mod2(canvas2)
 
-function criarLinha(mod2,x1,y1, x2, y2, gr){
+function criarLinha(mod2,x1,y1, x2, y2, gr, cor){
     mod2.beginPath()
     mod2.moveTo(x1,y1)
     mod2.lineTo(x2,y2)
-    mod2.strokeStyle = "red"
+    mod2.strokeStyle = cor
     mod2.lineWidth = gr
     mod2.stroke()
 }
