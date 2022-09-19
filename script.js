@@ -249,6 +249,7 @@ MOD2.addEventListener('click', (event) => {
     if((mouse_y >= 100-4) && (mouse_y <= 107-4)){
         cortar(1);
     }
+    //sim
     if((mouse_y >= 150-4) && (mouse_y <= 157-4)){
         cortar(2);
     }
