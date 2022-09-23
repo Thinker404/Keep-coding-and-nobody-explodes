@@ -167,7 +167,18 @@ requestAnimationFrame(pisca_call);
 
 // ------------ END-ANIMATION --------------
 
-//Modulo dos fios
+//Módulo 1 - Sequência certa
+
+function mod1(canvas1){
+    criarQuadrado(canvas1, 35,40,110,110);
+    criarQuadrado(canvas1, 35,160,110,110);
+    criarQuadrado(canvas1, 160,40,110,110);
+    criarQuadrado(canvas1, 160,160,110,110);
+}
+
+
+
+//Modulo 2 - Corte dos fios
 function mod2(canvas2){
     criarLinha(canvas2, 0, 50, 300, 50, 7, 'red');
     criarLinha(canvas2, 0, 100, 300, 100, 7, 'black');
@@ -176,11 +187,40 @@ function mod2(canvas2){
     criarLinha(canvas2, 0, 250, 300, 250, 7, 'grey');
 }
 
-
-
-
 setInterval(relogio, 1000);
-mod2(canvas2)
+mod2(canvas2);
+mod1(canvas1);
+
+/*<------------------- Funcionamento dos módulos ------------------->*/ 
+
+//Módulo 1 
+
+function criarQuadrado(mod1, x1,y1, x2, y2){
+    mod1.beginPath();
+    mod1.rect(x1,y1,x2,y2);
+    mod1.fillStyle = "#f0d45e"
+    mod1.stroke();
+    mod1.fill();
+}
+
+MOD1.addEventListener('click', (event) => {
+
+    var mouse_y = event.offsetY;
+    var mouse_x = event.offsetX;
+    if(((mouse_y >= 40) && (mouse_y <= 150)) && ((mouse_x >=35) && (mouse_x <= 145)) ){
+        alert('1');
+    }
+    if(((mouse_y >= 40) && (mouse_y <= 150)) && ((mouse_x >=160) && (mouse_x <= 270)) ){
+        alert('2');
+    }
+    if(((mouse_y >= 160) && (mouse_y <= 270)) && ((mouse_x >=35) && (mouse_x <= 145)) ){
+        alert('3');
+    }
+    if(((mouse_y >= 160) && (mouse_y <= 270)) && ((mouse_x >=160) && (mouse_x <= 270)) ){
+        alert('4');
+    }
+
+})
 
 //Modulo 2
 
