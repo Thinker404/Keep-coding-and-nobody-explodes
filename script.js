@@ -1,3 +1,6 @@
+var seq1 = ['s1','s3','s4','s2','s5'];
+var seq2 = ['s5', 's5','s2', 's4', 's3'];
+
 
 // function padrao(ctx){
 //     ctx.beginPath();
@@ -168,12 +171,22 @@ requestAnimationFrame(pisca_call);
 // ------------ END-ANIMATION --------------
 
 //Módulo 1 - Sequência certa
-
+var valido = 0;
 function mod1(canvas1){
+
+    if(valido == 0){
+
     criarQuadrado(canvas1, 35,40,110,110);
     criarQuadrado(canvas1, 35,160,110,110);
     criarQuadrado(canvas1, 160,40,110,110);
     criarQuadrado(canvas1, 160,160,110,110);
+
+    for(i=0; i < 4; i++){
+    colocarImagem(i, canvas1)
+    }
+    valido = 1
+}
+    
 }
 
 
@@ -203,24 +216,82 @@ function criarQuadrado(mod1, x1,y1, x2, y2){
     mod1.fill();
 }
 
+function colocarImagem(caixa, MOD1){
+    let xi, yi, xf, yf;
+    switch(caixa){
+        case 1:
+            xi = 10;
+            yi = 150;
+            xf = 35;
+            yf = 145;
+            break;
+        case 2:
+            xi = 40;
+            yi = 150;
+            xf = 160;
+            yf = 270;
+            break;
+        case 3:
+            xi = 160;
+            yi = 270;
+            xf = 35;
+            yf = 145;
+            break;
+        case 4:
+            xi = 160;
+            yi = 270;
+            xf = 160;
+            yf = 270;
+            break;
+    }
+
+    base_image = new Image();
+    base_image.src = '/media/simbolos/s2.png';
+    MOD1.drawImage(base_image, xi, yi, xf, yf);
+}
+
 MOD1.addEventListener('click', (event) => {
 
     var mouse_y = event.offsetY;
     var mouse_x = event.offsetX;
-    if(((mouse_y >= 40) && (mouse_y <= 150)) && ((mouse_x >=35) && (mouse_x <= 145)) ){
+    if(((mouse_y >= 40) && (mouse_y <= 150)) && ((mouse_x >=35) && (mouse_x <= 145))){
         alert('1');
+        sequencia('s1')
     }
-    if(((mouse_y >= 40) && (mouse_y <= 150)) && ((mouse_x >=160) && (mouse_x <= 270)) ){
+    if(((mouse_y >= 40) && (mouse_y <= 150)) && ((mouse_x >=160) && (mouse_x <= 270))){
         alert('2');
+        sequencia('s2')
     }
-    if(((mouse_y >= 160) && (mouse_y <= 270)) && ((mouse_x >=35) && (mouse_x <= 145)) ){
+    if(((mouse_y >= 160) && (mouse_y <= 270)) && ((mouse_x >=35) && (mouse_x <= 145))){
         alert('3');
+        sequencia('s3')
     }
-    if(((mouse_y >= 160) && (mouse_y <= 270)) && ((mouse_x >=160) && (mouse_x <= 270)) ){
+    if(((mouse_y >= 160) && (mouse_y <= 270)) && ((mouse_x >=160) && (mouse_x <= 270))){
         alert('4');
+        sequencia('s4')
     }
 
 })
+
+var aperto = 0;
+function sequencia(clicado){
+/*
+1 - Procurar a sequencia no seq.json
+2 - Verificar se ele clicou na ordem correta
+3 - Deixar verde ou vermelho caso clicado errado
+4 - Chorar pq isso n vai ser fácil
+*/ 
+
+var certo = seq1[aperto]
+if(clicado == certo){
+    aperto+=1 
+    alert(`Sábio ${aperto}`)
+}
+else{
+    alert('errado!')
+    aperto = 1
+}
+}
 
 //Modulo 2
 
