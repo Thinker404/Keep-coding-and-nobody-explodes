@@ -1,52 +1,8 @@
 var seq1 = ['s1','s3','s4','s2','s5'];
 var seq2 = ['s5', 's5','s2', 's4', 's3'];
 
-
-// function padrao(ctx){
-//     ctx.beginPath();
-//     ctx.fillStyle = 'green';
-//     ctx.ellipse(20,20,10,10,0,0,2*Math.PI,false);
-//     ctx.lineWidth = "2";
-//     ctx.stroke();
-//     ctx.fill();
-//     ctx.beginPath();
-//     ctx.strokeStyle = "black";
-//     ctx.lineWidth = "2";
-//     ctx.rect(5,5,290,290)
-//     ctx.stroke();
-// }
-
-// function cinza(ctx){
-//     ctx.beginPath();
-//     ctx.fillStyle = 'gray';
-//     ctx.ellipse(20,20,10,10,0,0,2*Math.PI,false);
-//     ctx.lineWidth = "2";
-//     ctx.stroke();
-//     ctx.fill();
-//     ctx.beginPath();
-//     ctx.strokeStyle = "black";
-//     ctx.lineWidth = "2";
-//     ctx.rect(5,5,290,290)
-//     ctx.stroke();
-// }
-
-
-// function animate(tela, t){
-    
-//     requestAnimationFrame(animate);
-//     tela.clearRect(0, 0, 100, 100);
-    
-    
-//     if(t == 0){
-//         cinza(tela);
-//         t = 1;
-//         return;
-//     }else{
-//         padrao(tela);
-//         t = 0;
-//         return;
-//     }
-// }
+//base_image2 = new Image();
+  //   base_image.src = './media/simbolos/s2.png';
 
 //Relógio da bomba
 function relogio() {
@@ -89,6 +45,7 @@ if(condiçãoDeJogo == true){
 
 
 }
+
 
 const MOD1 = document.getElementById('mod_1');
 const MOD2 = document.getElementById('mod_2');
@@ -170,34 +127,60 @@ requestAnimationFrame(pisca_call);
 
 // ------------ END-ANIMATION --------------
 
+
 //Módulo 1 - Sequência certa
-var valido = 0;
+
+// var base_image = new Image();
+// base_image.src = './media/simbolos/s3.png';
+// canvas1.drawImage(base_image);
+
+var valido = 1
 function mod1(canvas1){
 
-    if(valido == 0){
+        criarQuadrado(canvas1, 35,40,110,110);
+        criarQuadrado(canvas1, 35,160,110,110);
+        criarQuadrado(canvas1, 160,40,110,110);
+        criarQuadrado(canvas1, 160,160,110,110);
 
-    criarQuadrado(canvas1, 35,40,110,110);
-    criarQuadrado(canvas1, 35,160,110,110);
-    criarQuadrado(canvas1, 160,40,110,110);
-    criarQuadrado(canvas1, 160,160,110,110);
-
-    for(i=0; i < 4; i++){
-    colocarImagem(i, canvas1)
-    }
-    valido = 1
-}
-    
+        if(valido = 1){
+            
+            console.log('vida')
+            valido = 0;
+        }
 }
 
 
 
 //Modulo 2 - Corte dos fios
+
+
+
+
+
 function mod2(canvas2){
-    criarLinha(canvas2, 0, 50, 300, 50, 7, 'red');
-    criarLinha(canvas2, 0, 100, 300, 100, 7, 'black');
-    criarLinha(canvas2, 0, 150, 300, 150, 7, 'green');
-    criarLinha(canvas2, 0, 200, 300, 200, 7, 'yellow');
-    criarLinha(canvas2, 0, 250, 300, 250, 7, 'grey');
+
+    let amarelo = "#ffff66";
+    let rosa = "#ff80c1";
+    let azul = "#99ffdd";
+    let branco = "#ffffff";
+    let verde = "#66ff99";
+
+    var cores = [amarelo, rosa, azul, branco, verde]
+    var cor = [];
+
+    for(i=0; i<5; i++){
+        let index_cor = Math.floor(Math.random() * cores.length);
+        cor[i] = cores[index_cor];
+        cores.splice(index_cor, 1)
+}
+
+    
+
+    criarLinha(canvas2, 0, 50, 300, 50, 7, cor[0]);
+    criarLinha(canvas2, 0, 100, 300, 100, 7, cor[1]);
+    criarLinha(canvas2, 0, 150, 300, 150, 7, cor[2]);
+    criarLinha(canvas2, 0, 200, 300, 200, 7, cor[3]);
+    criarLinha(canvas2, 0, 250, 300, 250, 7, cor[4]);
 }
 
 setInterval(relogio, 1000);
@@ -214,41 +197,46 @@ function criarQuadrado(mod1, x1,y1, x2, y2){
     mod1.fillStyle = "#f0d45e"
     mod1.stroke();
     mod1.fill();
+
+   
 }
 
-function colocarImagem(caixa, MOD1){
-    let xi, yi, xf, yf;
-    switch(caixa){
-        case 1:
-            xi = 10;
-            yi = 150;
-            xf = 35;
-            yf = 145;
-            break;
-        case 2:
-            xi = 40;
-            yi = 150;
-            xf = 160;
-            yf = 270;
-            break;
-        case 3:
-            xi = 160;
-            yi = 270;
-            xf = 35;
-            yf = 145;
-            break;
-        case 4:
-            xi = 160;
-            yi = 270;
-            xf = 160;
-            yf = 270;
-            break;
-    }
+// function colocarImagem(caixa, MOD1){
+//     let xi = 0; 
+//     let yi = 0; 
+//     let xf = 0;
+//     let yf = 0;
+    
+//     switch(caixa){
+//         case 1:
+//             xi = 10;
+//             yi = 150;
+//             xf = 35;
+//             yf = 145;
+//             break;
+//         case 2:
+//             xi = 40;
+//             yi = 150;
+//             xf = 160;
+//             yf = 270;
+//             break;
+//         case 3:
+//             xi = 160;
+//             yi = 270;
+//             xf = 35;
+//             yf = 145;
+//             break;
+//         case 4:
+//             xi = 160;
+//             yi = 270;
+//             xf = 160;
+//             yf = 270;
+//             break;
+//     }
 
-    base_image = new Image();
-    base_image.src = '/media/simbolos/s2.png';
-    MOD1.drawImage(base_image, xi, yi, xf, yf);
-}
+//    
+ //    MOD1.drawImage(base_image2, xi, yi, xf, yf);
+// }
 
 MOD1.addEventListener('click', (event) => {
 
@@ -275,22 +263,22 @@ MOD1.addEventListener('click', (event) => {
 
 var aperto = 0;
 function sequencia(clicado){
-/*
-1 - Procurar a sequencia no seq.json
-2 - Verificar se ele clicou na ordem correta
-3 - Deixar verde ou vermelho caso clicado errado
-4 - Chorar pq isso n vai ser fácil
-*/ 
+    /*
+    1 - Procurar a sequencia no seq.json
+    2 - Verificar se ele clicou na ordem correta
+    3 - Deixar verde ou vermelho caso clicado errado
+    4 - Chorar pq isso n vai ser fácil
+    */ 
 
-var certo = seq1[aperto]
-if(clicado == certo){
-    aperto+=1 
-    alert(`Sábio ${aperto}`)
-}
-else{
-    alert('errado!')
-    aperto = 1
-}
+    var certo = seq1[aperto]
+    if(clicado == certo){
+        aperto+=1 
+        alert(`Sábio ${aperto - 1}`)
+    }
+    else{
+        alert('errado!')
+        aperto = 1
+    }
 }
 
 //Modulo 2
@@ -344,6 +332,15 @@ function cortar(index_fio){
     }   
 
     canvas2.clearRect(xi,yi,xf,yf);
+
+    if(cor[0] == "azul"){
+        alert("a")
+    }else{
+        alert(cor[0])
+    }
+    
+
+    
 }
    
 
@@ -360,7 +357,7 @@ MOD2.addEventListener('click', (event) => {
     if((mouse_y >= 100-4) && (mouse_y <= 107-4)){
         cortar(1);
     }
-    //sim
+
     if((mouse_y >= 150-4) && (mouse_y <= 157-4)){
         cortar(2);
     }

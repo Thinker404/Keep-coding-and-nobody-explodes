@@ -14,3 +14,16 @@
         // request another loop of animation
         requestAnimationFrame(animate);
     }
+-------------------------------------------
+Fios
+
+Rosa pastel - #ff80c1
+Azul pastel - #99ffdd
+Amarelo pastel - #ffff66
+Branco - #ffffff
+Verde agua - #66ff99
+
+
+Se fio1 = azul; cortar o terceiro fio;
+se fio1 = azul & fio5 = rosa; cortar o fio branco;
+--------------------------------------------
