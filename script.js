@@ -78,7 +78,7 @@ let sec = 00;
 
 let condiçãoDeJogo = true;
 
-
+var array = [];
 //ANIMATION:
 
 function pisca_verde_animation(quadro){
@@ -135,28 +135,23 @@ requestAnimationFrame(pisca_call);
 
 //Módulo 1 - Sequência certa
 
-// var base_image = new Image();
-// base_image.src = './media/simbolos/s3.png';
-// canvas1.drawImage(base_image);
-
-var valido = 1
-function mod1(canvas1){
+function mod1(canvas1, array){
 
     criarQuadrado(canvas1, 35,40,110,110);
     colocarImagem(1, canvas1);
-    aleatorio(1);
+    aleatorio(1, array);
 
     criarQuadrado(canvas1, 35,160,110,110);
     colocarImagem(2, canvas1);
-    aleatorio(2);
+    aleatorio(2, array);
 
     criarQuadrado(canvas1, 160,40,110,110);
     colocarImagem(3, canvas1);
-    aleatorio(3);
+    aleatorio(3, array);
 
     criarQuadrado(canvas1, 160,160,110,110);
     colocarImagem(4, canvas1);
-    aleatorio(4);
+    aleatorio(4, array);
 }
 
 
@@ -187,8 +182,8 @@ function mod2(canvas2){
 }
 
 setInterval(relogio, 1000);
+mod1(canvas1, array);
 mod2(canvas2);
-mod1(canvas1);
 
 /*<------------------- Funcionamento dos módulos ------------------->*/ 
 
@@ -218,7 +213,6 @@ function colocarImagem(caixa, MOD1){
         {
             MOD1.drawImage(base_image1, xi1, yi1, xf1, yf1);
         }
-        base_image1.src = '/media/simbolos/s1.png';
     }
 
     if(caixa == 2){
@@ -231,20 +225,18 @@ function colocarImagem(caixa, MOD1){
         {
             MOD1.drawImage(base_image2, xi2, yi2, xf2, yf2);
         }
-        base_image2.src = '/media/simbolos/s2.png';
     }
 
     if(caixa == 3){
         xi3 = 160;
         yi3 = 40;
         xf3 = 110;
-        yf3 = 100;
+        yf3 = 110;
 
         base_image3.onload = function (e)
         {
             MOD1.drawImage(base_image3, xi3, yi3, xf3, yf3);
         }
-        base_image3.src = '/media/simbolos/s3.png';
     }
 
     if(caixa == 4){
@@ -257,7 +249,6 @@ function colocarImagem(caixa, MOD1){
         {
             MOD1.drawImage(base_image4, xi4, yi4, xf4, yf4);
         }
-        base_image4.src = '/media/simbolos/s4.png';
     }
 }
 
@@ -267,18 +258,34 @@ function colocarImagem(caixa, MOD1){
 /*
 Caso a imagem seja igual ele deverá escolher outra diferente
 */
-function aleatorio(imagem){
-    var sessao = []
-    var entrar = Math.floor(Math.random() * 4) + 1
-
+function aleatorio(imagem, array){
     let deixar = 'nao';
-    for(i = 0; i < sessao.length; i++){
-        let verificar = sessao[i];
-        if(verificar !== entrar){
+
+    do{
+        var entrar = Math.floor(Math.random() * 4) + 1;
+
+        if(array.length == 0){
             deixar = 'sim'
+
+        }else{
+
+            let permitir = 1
+            //Comparar os valores do array e os que aparecem
+            
+            for(i = 0; i < array.length; i++){
+            
+                let verificar = array[i];
+                if(verificar == entrar){
+                    permitir = 0
+                }
+            }
+
+            if(permitir == 1){
+                deixar = 'sim'
+            }
         }
-    }
-    
+    }while(deixar == 'nao');
+
 
     switch(imagem){
         case 1:
@@ -316,9 +323,10 @@ function aleatorio(imagem){
             base_imagem.src = '/media/simbolos/s4.png';
             break;
     }
+    
 
     if(deixar == 'sim'){
-        sessao.push(entrar)
+        array.push(`${entrar}`);
     }
 }
 
@@ -327,19 +335,15 @@ MOD1.addEventListener('click', (event) => {
     var mouse_y = event.offsetY;
     var mouse_x = event.offsetX;
     if(((mouse_y >= 40) && (mouse_y <= 150)) && ((mouse_x >=35) && (mouse_x <= 145))){
-        alert('1');
         sequencia('s1')
     }
     if(((mouse_y >= 40) && (mouse_y <= 150)) && ((mouse_x >=160) && (mouse_x <= 270))){
-        alert('2');
         sequencia('s2')
     }
     if(((mouse_y >= 160) && (mouse_y <= 270)) && ((mouse_x >=35) && (mouse_x <= 145))){
-        alert('3');
         sequencia('s3')
     }
     if(((mouse_y >= 160) && (mouse_y <= 270)) && ((mouse_x >=160) && (mouse_x <= 270))){
-        alert('4');
         sequencia('s4')
     }
 
