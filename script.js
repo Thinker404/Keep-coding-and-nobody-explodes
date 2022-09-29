@@ -1,9 +1,8 @@
 var seq1 = ['s1','s3','s4','s2','s5'];
 var seq2 = ['s5', 's5','s2', 's4', 's3'];
 
-//base_image2 = new Image();
-  //   base_image.src = './media/simbolos/s2.png';
-
+    
+    
 //Relógio da bomba
 function relogio() {
 if(condiçãoDeJogo == true){
@@ -55,6 +54,24 @@ const canvas1 = MOD1.getContext('2d');
 const canvas2 = MOD2.getContext('2d');
 const canvas3 = MOD3.getContext('2d');
 const canvas4 = MOD4.getContext('2d');
+
+
+var base_image1 = new Image();
+var base_image2 = new Image();
+var base_image3 = new Image();
+var base_image4 = new Image();
+
+// var img = new Image();
+// window.onload = function (){
+
+
+// img.onload = function (e)
+//     {
+//         canvas1.drawImage(img, 0, 0);
+//     }
+//     img.src = '/media/simbolos/s1.png';
+// }
+
 
 MOD1.width = 300
 MOD1.height = MOD1.width;
@@ -136,17 +153,21 @@ requestAnimationFrame(pisca_call);
 
 var valido = 1
 function mod1(canvas1){
+    criarQuadrado(canvas1, 35,40,110,110);
+    colocarImagem(1, canvas1);
+    aleatorio(1);
 
-        criarQuadrado(canvas1, 35,40,110,110);
-        criarQuadrado(canvas1, 35,160,110,110);
-        criarQuadrado(canvas1, 160,40,110,110);
-        criarQuadrado(canvas1, 160,160,110,110);
+    criarQuadrado(canvas1, 35,160,110,110);
+    colocarImagem(2, canvas1);
+    aleatorio(2);
 
-        if(valido = 1){
-            
-            console.log('vida')
-            valido = 0;
-        }
+    criarQuadrado(canvas1, 160,40,110,110);
+    colocarImagem(3, canvas1);
+    aleatorio(3);
+
+    criarQuadrado(canvas1, 160,160,110,110);
+    colocarImagem(4, canvas1);
+    aleatorio(4);
 }
 
 
@@ -201,42 +222,119 @@ function criarQuadrado(mod1, x1,y1, x2, y2){
    
 }
 
-// function colocarImagem(caixa, MOD1){
-//     let xi = 0; 
-//     let yi = 0; 
-//     let xf = 0;
-//     let yf = 0;
-    
-//     switch(caixa){
-//         case 1:
-//             xi = 10;
-//             yi = 150;
-//             xf = 35;
-//             yf = 145;
-//             break;
-//         case 2:
-//             xi = 40;
-//             yi = 150;
-//             xf = 160;
-//             yf = 270;
-//             break;
-//         case 3:
-//             xi = 160;
-//             yi = 270;
-//             xf = 35;
-//             yf = 145;
-//             break;
-//         case 4:
-//             xi = 160;
-//             yi = 270;
-//             xf = 160;
-//             yf = 270;
-//             break;
-//     }
+function colocarImagem(caixa, MOD1){
 
-//    
- //    MOD1.drawImage(base_image2, xi, yi, xf, yf);
-// }
+    if(caixa == 1){
+        xi1 = 35;
+        yi1 = 40;
+        xf1 = 110;
+        yf1 = 110;
+
+        base_image1.onload = function (e)
+        {
+            MOD1.drawImage(base_image1, xi1, yi1, xf1, yf1);
+        }
+        base_image1.src = '/media/simbolos/s1.png';
+    }
+
+    if(caixa == 2){
+        xi2 = 35;
+        yi2 = 160;
+        xf2 = 110;
+        yf2 = 110;
+
+        base_image2.onload = function (e)
+        {
+            MOD1.drawImage(base_image2, xi2, yi2, xf2, yf2);
+        }
+        base_image2.src = '/media/simbolos/s2.png';
+    }
+
+    if(caixa == 3){
+        xi3 = 160;
+        yi3 = 40;
+        xf3 = 110;
+        yf3 = 100;
+
+        base_image3.onload = function (e)
+        {
+            MOD1.drawImage(base_image3, xi3, yi3, xf3, yf3);
+        }
+        base_image3.src = '/media/simbolos/s3.png';
+    }
+
+    if(caixa == 4){
+        xi4 = 160;
+        yi4 = 160;
+        xf4 = 110;
+        yf4 = 110;
+
+        base_image4.onload = function (e)
+        {
+            MOD1.drawImage(base_image4, xi4, yi4, xf4, yf4);
+        }
+        base_image4.src = '/media/simbolos/s4.png';
+    }
+}
+
+//Seleciona uma imagem aleatória
+/*
+Caso a imagem seja igual ele deverá outra diferente
+*/
+function aleatorio(imagem){
+    var sessao = []
+    var entrar = Math.floor(Math.random() * 4) + 1
+
+    let deixar = 'nao';
+    for(i = 0; i < sessao.length; i++){
+        let verificar = sessao[i];
+        if(verificar !== entrar){
+            deixar = 'sim'
+        }
+    }
+    
+
+    switch(imagem){
+        case 1:
+            base_imagem = base_image1
+            break;
+
+        case 2:
+            base_imagem = base_image2
+            break;
+
+        case 3:
+            base_imagem = base_image3
+            break;
+                    
+        case 4:
+            base_imagem = base_image4
+            break;
+
+    }
+
+    switch(entrar){
+        case 1: 
+            base_imagem.src = '/media/simbolos/s1.png';
+            break;
+            
+        case 2:        
+           base_imagem.src = '/media/simbolos/s2.png';
+           break;
+
+        case 3:
+            base_imagem.src = '/media/simbolos/s3.png';
+            break;
+
+        case 4:
+            base_imagem.src = '/media/simbolos/s4.png';
+            break;
+    }
+
+    if(deixar == 'sim'){
+        sessao.push(entrar)
+    }
+}
 
 MOD1.addEventListener('click', (event) => {
 
@@ -277,7 +375,7 @@ function sequencia(clicado){
     }
     else{
         alert('errado!')
-        aperto = 1
+        aperto = 0
     }
 }
 
