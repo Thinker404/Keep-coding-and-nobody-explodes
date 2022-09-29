@@ -2,7 +2,6 @@ var seq1 = ['s1','s3','s4','s2','s5'];
 var seq2 = ['s5', 's5','s2', 's4', 's3'];
 
     
-    
 //Relógio da bomba
 function relogio() {
 if(condiçãoDeJogo == true){
@@ -60,17 +59,6 @@ var base_image1 = new Image();
 var base_image2 = new Image();
 var base_image3 = new Image();
 var base_image4 = new Image();
-
-// var img = new Image();
-// window.onload = function (){
-
-
-// img.onload = function (e)
-//     {
-//         canvas1.drawImage(img, 0, 0);
-//     }
-//     img.src = '/media/simbolos/s1.png';
-// }
 
 
 MOD1.width = 300
@@ -153,6 +141,7 @@ requestAnimationFrame(pisca_call);
 
 var valido = 1
 function mod1(canvas1){
+
     criarQuadrado(canvas1, 35,40,110,110);
     colocarImagem(1, canvas1);
     aleatorio(1);
@@ -173,11 +162,6 @@ function mod1(canvas1){
 
 
 //Modulo 2 - Corte dos fios
-
-
-
-
-
 function mod2(canvas2){
 
     let amarelo = "#ffff66";
@@ -193,9 +177,7 @@ function mod2(canvas2){
         let index_cor = Math.floor(Math.random() * cores.length);
         cor[i] = cores[index_cor];
         cores.splice(index_cor, 1)
-}
-
-    
+    }
 
     criarLinha(canvas2, 0, 50, 300, 50, 7, cor[0]);
     criarLinha(canvas2, 0, 100, 300, 100, 7, cor[1]);
@@ -210,18 +192,20 @@ mod1(canvas1);
 
 /*<------------------- Funcionamento dos módulos ------------------->*/ 
 
+
 //Módulo 1 
 
+//Cria o fundo
 function criarQuadrado(mod1, x1,y1, x2, y2){
     mod1.beginPath();
     mod1.rect(x1,y1,x2,y2);
     mod1.fillStyle = "#f0d45e"
     mod1.stroke();
-    mod1.fill();
-
-   
+    mod1.fill();   
 }
 
+
+//Carrega as imagens nos seus respectivos lugares
 function colocarImagem(caixa, MOD1){
 
     if(caixa == 1){
@@ -277,9 +261,11 @@ function colocarImagem(caixa, MOD1){
     }
 }
 
+
 //Seleciona uma imagem aleatória
+
 /*
-Caso a imagem seja igual ele deverá outra diferente
+Caso a imagem seja igual ele deverá escolher outra diferente
 */
 function aleatorio(imagem){
     var sessao = []
@@ -379,6 +365,8 @@ function sequencia(clicado){
     }
 }
 
+
+
 //Modulo 2
 
 function criarLinha(mod2,x1,y1, x2, y2, gr, cor){
@@ -441,7 +429,6 @@ function cortar(index_fio){
     
 }
    
-
 MOD2.addEventListener('click', (event) => {
 
     //const rect = MOD2.getBoundingClientRect();
