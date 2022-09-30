@@ -24,6 +24,10 @@ Branco - #ffffff
 Verde agua - #66ff99
 
 
+UM FIO BRANCO:
 Se fio1 = azul; cortar o terceiro fio;
-se fio1 = azul & fio5 = rosa; cortar o fio branco;
+Se fio1 = azul & fio5 = rosa; cortar o fio branco;
+
+DOIS FRIOS BRANCOS
+Se fio5 =vermelho && sn = par; cortar f5;
 --------------------------------------------

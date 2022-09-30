@@ -1,6 +1,6 @@
 var seq1 = ['s1','s3','s4','s2','s5'];
 var seq2 = ['s5', 's5','s2', 's4', 's3'];
-
+var fio_certo = {};
     
 //Relógio da bomba
 function relogio() {
@@ -164,15 +164,96 @@ function mod2(canvas2){
     let azul = "#99ffdd";
     let branco = "#ffffff";
     let verde = "#66ff99";
+    var nf_amarelo = 0;
+    var nf_rosa = 0;
+    var nf_azul = 0;
+    var nf_branco = 0;
+    var nf_verde = 0;
 
-    var cores = [amarelo, rosa, azul, branco, verde]
     var cor = [];
+    var cores = [amarelo, rosa, azul, branco, verde]
 
+    //sorteando cor dos fios
     for(i=0; i<5; i++){
         let index_cor = Math.floor(Math.random() * cores.length);
         cor[i] = cores[index_cor];
-        cores.splice(index_cor, 1)
+        
+        //Permitindo 2 fios de cada cor
+        var target = cores[index_cor]
+        let counter = 0;
+        for (item of cor){
+            if (item == target){
+                counter++;
+            }
+        };
+        //contando fios
+        switch(target){
+        case "#ffff66":
+            nf_amarelo++;
+            break;
+        case "#ff80c1":
+            nf_rosa++;
+            break;
+        case "#99ffdd":
+            nf_azul++;
+            break;
+        case "#ffffff":
+            nf_branco++;
+            break;
+        case "#66ff99":
+            nf_verde++;
+            break;
     }
+        if(counter > 1){
+            cores.splice(index_cor, 1)
+        }
+    }
+    
+    //FIO CERTO PARA CORTAR
+    switch(nf_branco){
+        case 0:
+            if(cor[2] == "#66ff99"){
+                fio_certo.num = 2;
+            }else if(nf_rosa > 1){
+                fio_certo.num = 0;
+            }else{
+                fio_certo.num = 4;
+            }
+            break;
+
+        case 1:
+            if(cor[0] == "#99ffdd"){
+                if(cor[4] == "#ff80c1"){
+                    fio_certo.num = 0;
+                }else{
+                    fio_certo.num = 4;
+                }
+            }else if(cor[0] == "#ffffff"){
+                if(cor[4] == "ff80c1"){
+                    fio_certo.num = 2;
+                }else if (cor[4] == "#99ffdd"){
+                    fio_certo.num = 1;
+                }else{
+                    fio_certo.num = 3;
+                }
+            }else{
+                fio_certo.num = 0;
+            }
+            break;
+
+        case 2:
+            if(nf_verde == 0){
+                fio_certo.num = 3;
+            }else if(nf_verde == 1){
+                fio_certo.num = 2;
+            }else{
+                fio_certo.num = 4;
+            }
+            break;
+    }
+
+    console.log(nf_amarelo, nf_rosa, nf_azul, nf_branco, nf_verde);
+    console.log(fio_certo.num);
 
     criarLinha(canvas2, 0, 50, 300, 50, 7, cor[0]);
     criarLinha(canvas2, 0, 100, 300, 100, 7, cor[1]);
@@ -181,7 +262,22 @@ function mod2(canvas2){
     criarLinha(canvas2, 0, 250, 300, 250, 7, cor[4]);
 }
 
-setInterval(relogio, 1000);
+
+
+function fio_cortado(fio){
+    if(fio == fio_certo.num){
+        return alert("mestre dos fios")
+    }else{
+        console.log(fio)
+        return alert("kabum katau")
+    }
+}
+
+
+
+
+
+setInterval(relogio, 1000); 
 mod1(canvas1, array);
 mod2(canvas2);
 
@@ -390,6 +486,7 @@ function cortar(index_fio){
             yi = 45;
             xf = 280;
             yf = 15;
+            fio_cortado(0)
             break;
             
         case 1:
@@ -397,6 +494,7 @@ function cortar(index_fio){
             yi = 95;
             xf = 280;
             yf = 15;
+            fio_cortado(1)
             break;
             
         case 2:
@@ -404,6 +502,7 @@ function cortar(index_fio){
             yi = 145;
             xf = 280;
             yf = 15;
+            fio_cortado(2)
             break;
 
         case 3:
@@ -411,6 +510,7 @@ function cortar(index_fio){
             yi = 195;
             xf = 280;
             yf = 15;
+            fio_cortado(3)
             break;
 
         case 4:
@@ -418,21 +518,14 @@ function cortar(index_fio){
             yi = 245;
             xf = 280;
             yf = 15;
+            fio_cortado(4)
             break;
     }   
 
     canvas2.clearRect(xi,yi,xf,yf);
 
-    if(cor[0] == "azul"){
-        alert("a")
-    }else{
-        alert(cor[0])
-    }
-    
-
-    
 }
-   
+
 MOD2.addEventListener('click', (event) => {
 
     //const rect = MOD2.getBoundingClientRect();
