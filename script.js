@@ -458,13 +458,13 @@ function sequencia(clicado){
     if(clicado == certo){
         aperto+=1 
         alert(`Sábio ${aperto - 1}`)
+
     }
     else{
         alert('errado!')
         aperto = 0
     }
 }
-
 
 
 //Modulo 2
