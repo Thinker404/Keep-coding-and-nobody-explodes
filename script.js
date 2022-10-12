@@ -1,44 +1,44 @@
 var seq1 = ['s1','s3','s4','s2','s5'];
-var seq2 = ['s5', 's5','s2', 's4', 's3'];
+var seq2 = ['s5', 's1','s2', 's4', 's3'];
 var fio_certo = {};
     
 //Relógio da bomba
 function relogio() {
-if(condiçãoDeJogo == true){
+    if(condiçãoDeJogo){
 
-    if(min == 00 && sec == 00){
-        alert("You lose!");
-        condiçãoDeJogo = false;
-        return;
-    }
+        if(min == 00 && sec == 00){
+            alert("You lose!");
+            condiçãoDeJogo = false;
+            return;
+        }
 
-    if(sec <= 10 && sec>0){
-        sec = sec - 1;
-        document.getElementById('sec').innerText = `0${sec}`;
-        return
-    }
+        if(sec <= 10 && sec>0){
+            sec = sec - 1;
+            document.getElementById('sec').innerText = `0${sec}`;
+            return
+        }
 
-    if(sec >= 11){
-        sec = sec - 1;
-        document.getElementById('sec').innerText = sec;
-        return
-    }
+        if(sec >= 11){
+            sec = sec - 1;
+            document.getElementById('sec').innerText = sec;
+            return
+        }
 
-    if(min > 0 && sec == 0){
-        min = min-1
-        document.getElementById('min').innerText = `0${min}`;
-        sec = 59    
-        document.getElementById('sec').innerText = sec;
-        return
-    }
+        if(min > 0 && sec == 0){
+            min = min-1
+            document.getElementById('min').innerText = `0${min}`;
+            sec = 59    
+            document.getElementById('sec').innerText = sec;
+            return
+        }
 
-    if(min == 0){
-        sec = sec - 1
-        document.getElementById('min').innerHTML = `0${min}`;
-        document.getElementById('sec').innerText = sec;
-        return
+        if(min == 0){
+            sec = sec - 1
+            document.getElementById('min').innerHTML = `0${min}`;
+            document.getElementById('sec').innerText = sec;
+            return
+        }
     }
-}
 
 
 
@@ -86,7 +86,7 @@ function pisca_verde_animation(quadro){
     let y=20;
     let radius=10;
     quadro.beginPath();
-    quadro.fillStyle='#00FF00';
+    quadro.fillStyle = '#00FF00';
     quadro.arc(x,y,radius,0,Math.PI*2);
     quadro.fill();
     
@@ -97,32 +97,42 @@ function pisca_cinza_animation(quadro){
     let y=20;
     let radius=10;
     quadro.beginPath();
-    quadro.fillStyle='#808080';
+    quadro.fillStyle = '#FF0000';
     quadro.arc(x,y,radius,0,Math.PI*2);
     quadro.fill();
 
+}
+function desativado(quadro){
+    let x=20;
+    let y=20;
+    let radius=10;
+    quadro.beginPath();
+    quadro.fillStyle = '#FF0000';
+    quadro.arc(x,y,radius,0,Math.PI*2);
+    quadro.fill();
 }
 
 //CALLING
 
 var fps_pisca = 1;
-var t = 0;
+var tempo = 0;
+var m1, m2, m3, m4;
 
 function pisca_call(timestamp){
     setTimeout(function(){ //requestAnimationFrame to 20fps
 
-        if(t == 0){
-            pisca_verde_animation(canvas1)
-            pisca_verde_animation(canvas2)
-            pisca_verde_animation(canvas3)
-            pisca_verde_animation(canvas4)
-            t = 1;
+        if(tempo == 0){
+            if(!m1){pisca_verde_animation(canvas1)}
+            if(!m2){pisca_verde_animation(canvas2)}
+            if(!m3){pisca_verde_animation(canvas3)}
+            if(!m4){pisca_verde_animation(canvas4)}
+            tempo = 1;
         }else{
             pisca_cinza_animation(canvas1)
             pisca_cinza_animation(canvas2)
             pisca_cinza_animation(canvas3)
             pisca_cinza_animation(canvas4)
-            t = 0;
+            tempo = 0;
         }
         requestAnimationFrame(pisca_call)
         
@@ -355,34 +365,37 @@ function colocarImagem(caixa, MOD1){
 Caso a imagem seja igual ele deverá escolher outra diferente
 */
 function aleatorio(imagem, array){
-    let deixar = 'nao';
+    let deixar = false;
 
+    //Faz um sorteio de números e coloca a imagem referente ao número enquanto todos os valores forem diferentes
     do{
-        var entrar = Math.floor(Math.random() * 4) + 1;
+        //Variavel de sorteio
+        var entrar = Math.floor(Math.random() * 5) + 1;
 
+        //Verifica se o tamanho do array(as imagens) é igual a zero(não tem imagem colocada nos quadros) então deixa a imagem sorteiada entrar;
         if(array.length == 0){
-            deixar = 'sim'
+            deixar = true
 
         }else{
 
-            let permitir = 1
-            //Comparar os valores do array e os que aparecem
+            let permitir = true;
             
+            //Comparar as imagens para ver se são iguais
             for(i = 0; i < array.length; i++){
             
                 let verificar = array[i];
                 if(verificar == entrar){
-                    permitir = 0
+                    permitir = false;
                 }
             }
 
-            if(permitir == 1){
-                deixar = 'sim'
+            if(permitir){
+                deixar = true
             }
         }
-    }while(deixar == 'nao');
+    }while(!deixar);
 
-
+    //Verifica a qual quadro ele deve colocar a imagem
     switch(imagem){
         case 1:
             base_imagem = base_image1
@@ -399,9 +412,9 @@ function aleatorio(imagem, array){
         case 4:
             base_imagem = base_image4
             break;
-
     }
 
+    //Coloca a a foto no quadro 
     switch(entrar){
         case 1: 
             base_imagem.src = '/media/simbolos/s1.png';
@@ -418,10 +431,14 @@ function aleatorio(imagem, array){
         case 4:
             base_imagem.src = '/media/simbolos/s4.png';
             break;
+
+        case 5:
+            base_imagem.src = '/media/simbolos/s5.png';
+            break;
     }
     
 
-    if(deixar == 'sim'){
+    if(deixar){
         array.push(`${entrar}`);
     }
 }
@@ -447,22 +464,27 @@ MOD1.addEventListener('click', (event) => {
 
 var aperto = 0;
 function sequencia(clicado){
+
     /*
-    1 - Procurar a sequencia no seq.json
-    2 - Verificar se ele clicou na ordem correta
-    3 - Deixar verde ou vermelho caso clicado errado
+    1 - Comparar o array com o .json
+    2 - Colocar a ordem correta
+    3 - Verificar se a ordem esta correta
     4 - Chorar pq isso n vai ser fácil
     */ 
-
     var certo = seq1[aperto]
     if(clicado == certo){
         aperto+=1 
-        alert(`Sábio ${aperto - 1}`)
+        console.log('Errou!')
+        
+        if(aperto == 4){
+            m1 = true;
+            desativado(canvas1)
+        }
 
     }
     else{
-        alert('errado!')
-        aperto = 0
+        aperto = 0;
+        alert('errou')
     }
 }
 
