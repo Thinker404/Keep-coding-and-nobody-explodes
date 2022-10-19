@@ -7,8 +7,11 @@
 var ids = [66366336, 666366636, 10100110, 10110110];
 var seq1 = ['s1','s3','s4','s2','s5'];
 var seq2 = ['s5', 's1','s2', 's4', 's3'];
+var seq3 = ['s2', 's4', 's5', 's3', 's1'];
+
 //mod2
 var array = []; //Verificar a partir da sequencia correta
+var seqCerta = []; // 
 var fio_certo = {};
 
 
@@ -328,7 +331,7 @@ function aleatorio(imagem, array){
             break;
     }
 
-    //Coloca a a foto no quadro 
+    //Coloca a foto no quadro 
     switch(entrar){
         case 1: 
             base_imagem.src = '/media/simbolos/s1.png';
@@ -374,6 +377,31 @@ function aleatorio(imagem, array){
     if(deixar){
         array.push(`${entrar}`);
     }
+    // if(array.length == 4){
+    //     let barbaridade;
+    //     let sorteio = Math.floor(Math.random() * 3 + 1)
+    //     switch(sorteio){
+    //         case 1:
+    //             barbaridade = seq1;
+    //             break;
+    //         case 2:
+    //             barbaridade = seq2;
+    //             break;
+    //         case 3:
+    //             barbaridade = seq3;
+    //             break;
+    //     }
+    //     alert(barbaridade)
+    //     for(let i = 0; i < 4 ; i++){
+    //         let verificar = array[i];
+    //         for(let j = 0; j < 5; j++){
+    //             if(verificar == barbaridade[j]){
+    //                 seqCerta.push(verificar)
+    //             }
+    //         }
+    //     }
+    // alert(seqCerta);
+    // }
 }
 
 //Ouvindo os cliques
@@ -399,12 +427,6 @@ MOD1.addEventListener('click', (event) => {
 var aperto = 0;
 function sequencia(clicado){
 
-    /*
-    1 - Comparar o array com o .json
-    2 - Colocar a ordem correta
-    3 - Verificar se a ordem esta correta
-    4 - Chorar pq isso n vai ser fácil
-    */ 
     var certo = seq1[aperto]
     if(clicado == certo){
         aperto+=1 
