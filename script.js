@@ -1,17 +1,28 @@
 
+/* 
+    No Princípio...
+    Haviam um total de 3 pessoas...
+    Que sabiam como esse código funcionada...
+    Davi, Orochi e Deus...
+    Atualmente, apenas Deus sabe como isso ainda roda
+
+*/
+
+
 //========================================================
 //===================INICIANDO VARIAVEIS==================
 //========================================================
 
 //mod1
 var ids = [66366336, 666366636, 10100110, 10110110];
-var seq1 = ['s1','s3','s4','s2','s5'];
-var seq2 = ['s5', 's1','s2', 's4', 's3'];
-var seq3 = ['s2', 's4', 's5', 's3', 's1'];
+var modulo1;
+var seq1 = [1, 3, 4, 2, 9];
+var seq2 = [5, 6, 7, 8];
+var seq3 = [1, 2, 3, 4];
+var seq4 = [5, 4, 3, 2];
 
 //mod2
 var array = []; //Verificar a partir da sequencia correta
-var seqCerta = []; // 
 var fio_certo = {};
 
 
@@ -36,6 +47,11 @@ function playExplosion() {
 //========================================================
 //======Setando canvas e condicação de jogo===============
 //========================================================
+
+var mods_escolhidos = [];
+var mods = ['mod_1', 'mod_2', 'mod_3', 'mod_4'];
+var m1, m2, m3, m4;
+var incomplete = true;
 
 //criando canvas
 const MOD1 = document.getElementById('mod_1');
@@ -220,24 +236,38 @@ function criarQuadrado(mod1, x1,y1, x2, y2){
     mod1.fill();   
 }
 
+function sorteio(){
+    let sorteio = Math.floor(Math.random() * 2) + 1;
+    
+    switch(sorteio){
+        case 1:
+            modulo1 = seq1 
+            break
+        case 2:
+            modulo1 = seq2
+            break
+    }
+}
 //Criando quadro das imagens
 function mod1(canvas1, array){
 
+    sorteio()
+
     criarQuadrado(canvas1, 35,40,110,110);
     colocarImagem(1, canvas1);
-    aleatorio(1, array);
+    imagemaleatorio(1, array);
 
     criarQuadrado(canvas1, 35,160,110,110);
     colocarImagem(2, canvas1);
-    aleatorio(2, array);
+    imagemaleatorio(2, array);
 
     criarQuadrado(canvas1, 160,40,110,110);
     colocarImagem(3, canvas1);
-    aleatorio(3, array);
+    imagemaleatorio(3, array);
 
     criarQuadrado(canvas1, 160,160,110,110);
     colocarImagem(4, canvas1);
-    aleatorio(4, array);
+    imagemaleatorio(4, array);
 }
 
 //Carrega as imagens nos seus respectivos lugares
@@ -289,15 +319,51 @@ function colocarImagem(caixa, MOD1){
 }
 
 //Seleciona uma imagem aleatória
-function aleatorio(imagem, array){
-    let deixar = false;
+function imagemaleatorio(imagem, array){
+
+    let valorDoArray = seq1;
+    
+
+    let entradaDoArray = false;
     //Faz um sorteio de números e coloca a imagem referente ao número enquanto todos os valores forem diferentes
     do{
+       
+        /*
+            var entrar
+            do{
+                entrar =  Math.floor(Math.random() * 4) + 1;
+                let saida = false;
+                for(let i = 0; i < valorDoArray.length){
+                    let verificar = array[i];
+                    if(verificar == entrar){
+                    permitir = false;
+                }
+                }
+            }while(!saida)
+            if(array.length == 0){
+                entradaDoArray = true
+            }else{
+                let permitir = true;
+                //Comparar as imagens para ver se são iguais
+                for(let i = 0; i < array.length; i++){
+                    let entrada = valorDoArray[entrar]
+                    let verificar = array[i];
+                    if(verificar == entrada){
+                        permitir = false;
+                    }
+                }
+                if(permitir){
+                    entradaDoArray = true
+                }
+            }
+        */
+
+        
         //Variavel de sorteio
-        var entrar = Math.floor(Math.random() * 5) + 1;
+        var entrar = Math.floor(Math.random() * 9) + 1;
         //Verifica se o tamanho do array(as imagens) é igual a zero(não tem imagem colocada nos quadros) então deixa a imagem sorteiada entrar;
         if(array.length == 0){
-            deixar = true
+            entradaDoArray = true
         }else{
             let permitir = true;
             //Comparar as imagens para ver se são iguais
@@ -308,10 +374,10 @@ function aleatorio(imagem, array){
                 }
             }
             if(permitir){
-                deixar = true
+                entradaDoArray = true
             }
         }
-    }while(!deixar);
+    }while(!entradaDoArray);
     //Verifica a qual quadro ele deve colocar a imagem
     switch(imagem){
         case 1:
@@ -331,7 +397,7 @@ function aleatorio(imagem, array){
             break;
     }
 
-    //Coloca a foto no quadro 
+    //Coloca a a foto no quadro 
     switch(entrar){
         case 1: 
             base_imagem.src = '/media/simbolos/s1.png';
@@ -364,44 +430,13 @@ function aleatorio(imagem, array){
         case 8:
             base_imagem.src = '/media/simbolos/s8.png';
             break;
-        
-        case 9:
+        case 9: 
             base_imagem.src = '/media/simbolos/s9.png';
-            break;
-        
-        case 10:
-            base_imagem.src = '/media/simbolos/s10.png';
-            break;
-            
+            break; 
     }
-    if(deixar){
+    if(entradaDoArray){
         array.push(`${entrar}`);
     }
-    // if(array.length == 4){
-    //     let barbaridade;
-    //     let sorteio = Math.floor(Math.random() * 3 + 1)
-    //     switch(sorteio){
-    //         case 1:
-    //             barbaridade = seq1;
-    //             break;
-    //         case 2:
-    //             barbaridade = seq2;
-    //             break;
-    //         case 3:
-    //             barbaridade = seq3;
-    //             break;
-    //     }
-    //     alert(barbaridade)
-    //     for(let i = 0; i < 4 ; i++){
-    //         let verificar = array[i];
-    //         for(let j = 0; j < 5; j++){
-    //             if(verificar == barbaridade[j]){
-    //                 seqCerta.push(verificar)
-    //             }
-    //         }
-    //     }
-    // alert(seqCerta);
-    // }
 }
 
 //Ouvindo os cliques
@@ -427,6 +462,12 @@ MOD1.addEventListener('click', (event) => {
 var aperto = 0;
 function sequencia(clicado){
 
+    /*
+    1 - Comparar o array com o .json
+    2 - Colocar a ordem correta
+    3 - Verificar se a ordem esta correta
+    4 - Chorar pq isso n vai ser fácil
+    */ 
     var certo = seq1[aperto]
     if(clicado == certo){
         aperto+=1 
@@ -438,7 +479,7 @@ function sequencia(clicado){
 
     }else{
         aperto = 0;
-        alert('errou')
+        alert('KABUM!')
         min = 0;
         sec = 0;
     }
@@ -452,7 +493,7 @@ function sequencia(clicado){
 
 
 //========================================================
-//==============Módulo II - Corte dos fios/===============
+//==============Módulo II - Corte dos fios================
 //========================================================
 
 function mod2(canvas2){
@@ -649,6 +690,45 @@ MOD2.addEventListener('click', (event) => {
 //===========Módulo III - Botão de apertar===============
 //========================================================
 
+var md3_colors = ['#ffffff', '#99ffdd', '#ff80c1']
+var md3_cor_idx = Math.floor(Math.random()*3);
+var md3_cor = md3_colors[md3_cor_idx];
+
+function mod3(canvas){
+    //rosa = "#ff80c1"
+    //azul = "#99ffdd*"
+    //branco = "#ffffff"
+    spriteBtn();
+}
+
+function spriteBtn(){
+    let x=300/2;
+    let y=300/2;
+    let radius=100;
+    canvas3.beginPath();
+    canvas3.fillStyle = '#422600';
+    canvas3.arc(x,y,radius+5,0,Math.PI*2)
+    canvas3.fill()
+    canvas3.beginPath()
+    canvas3.fillStyle = md3_cor;
+    canvas3.arc(x,y,radius,0,Math.PI*2);
+    canvas3.fill()
+}
+
+MOD3.onclick = function(e) {
+    var rect = this.getBoundingClientRect(),   // get abs. position of canvas
+        x = e.clientX - rect.left,             // adjust mouse-position
+        y = e.clientY - rect.top;
+    
+    getArc(150, 150, 100);                        // get path wo/ filling/stroking it
+    if (canvas3.isPointInPath(x, y)) alert("Clicked");
+  };
+
+  function getArc(x, y, r) {
+    canvas3.beginPath();
+    canvas3.arc(x, y, r, 0, Math.PI*2);
+    canvas3.closePath();
+  }
 
 //========================================================
 //========================================================
@@ -664,6 +744,7 @@ MOD2.addEventListener('click', (event) => {
 setInterval(relogio, 1000); 
 mod1(canvas1, array);
 mod2(canvas2);
+mod3(canvas3);
 selectID();
 
 //========================================================

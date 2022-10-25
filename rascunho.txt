@@ -1,33 +1,21 @@
+Botões
 
+-Press me
+-Don't press me
+-Hold
+-[empty]
 
-    function animate(currentTime){
+-White
+-Blue
+-Red
 
-        // draw a full randomly circle
-        let x=20;
-        let y=20;
-        let radius=20;
-        canvas1.beginPath();
-        canvas1.arc(x,y,radius,0,Math.PI*2);
-        canvas1.fillStyle='#'+Math.floor(Math.random()*16777215).toString(16);
-        canvas1.fill();
+-10100110
+-10110110
 
-        // request another loop of animation
-        requestAnimationFrame(animate);
-    }
--------------------------------------------
-Fios
+------------------
 
-Rosa pastel - #ff80c1
-Azul pastel - #99ffdd
-Amarelo pastel - #ffff66
-Branco - #ffffff
-Verde agua - #66ff99
+Pressionar e soltar
+Pressionar e segurar por 7 segundos (não soltar)
+Pressionar quando o relogio marcar 5 em em alguma casa dos segundos
+Pressionar 3 vezes rápido
 
-
-UM FIO BRANCO:
-Se fio1 = azul; cortar o terceiro fio;
-Se fio1 = azul & fio5 = rosa; cortar o fio branco;
-
-DOIS FRIOS BRANCOS
-Se fio5 =vermelho && sn = par; cortar f5;
---------------------------------------------

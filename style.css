@@ -28,65 +28,62 @@ body{
     font-size: 3rem;
 }
 
-
-
 .game{
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: center;
+}
+
+.bomb{
+    background-color: rgb(131, 133, 136);
+    border: 4px solid rgb(32, 32, 32);
+}
+
+.row{
+    display: flex;
+    align-items: center;
+}
+
+.timer-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
 }
 
 .timer{
-    font-size: 5rem;
+    background-color: rgb(116, 99, 99);
+    font-size: 3rem;
     font-family:'digital-clock-font';
-    color: rgb(46, 33, 33);
+    color: rgb(71, 23, 23);
 
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-left: 1rem;
-    border: 3px solid black;
+    align-items: center;
 
-    max-height: 10rem;
-    width: 30rem; 
+    border: 1px solid rgb(54, 54, 54);
+
+    height: 300px;
+    width: 292px;
+
+    margin: 0;
+    padding: 0;
 }
 
-.bomb{
-    padding: 50px;
-    gap: 2.5rem;
-    margin-top: 30px;
-
-    background-color: rgb(45, 90, 102);
-
-    display: flex; 
-    flex-direction: column;
+.timer h1{
+    padding: 0;
+    margin: 0%;
 }
 
-.setor1{
-    gap: 1.5rem;
-
+.info{
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: nowrap;
-    flex-direction: row;
-}
-.setor2{
-    gap: 1.5rem;
-
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: nowrap;
-    flex-direction: row;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
 }
 
-.ladinho{
-    margin-top: 30px;
-    gap: 1rem;
-
-    display:flex;
-    flex-direction: column;
-    align-items: flex-end;
+.info h3{
+    font-size: 2rem;
 }
 
 canvas{
